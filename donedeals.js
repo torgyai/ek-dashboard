@@ -41,6 +41,66 @@
                   ["Wonen360", "https://www.wonen360.nl/article/9693347/45-franchisenemers-blokker-bereiken-akkoord-met-ondernemer-eric-kooistra/"]]
       },
       {
+        id: "speelgoed-2026", jaar: "2026", titel: T("Speelgoedimporteur · 14 zeecontainers", "Toy importer · 14 sea containers"),
+        soort: T("Overvoorraad", "Overstock"), afloop: "goed", demo: true,
+        kort: T("Einde seizoen, magazijn moest leeg voor de nieuwe collectie. Gemengde pallets, deels A-merken, in één koop overgenomen.",
+                "End of season, the warehouse had to be empty for the new collection. Mixed pallets, partly A-brands, taken over in a single purchase."),
+        detail: T("Inkoop € 310.000, binnen 26 dagen doorverkocht: ruim de helft naar de eigen winkels, de rest per pallet aan vaste afnemers in Duitsland en België. Doorlooptijd lag onder het gemiddelde omdat de partij al gesorteerd op pallet aankwam.",
+                  "Purchase € 310,000, resold within 26 days: over half to the group's own shops, the rest by the pallet to regular buyers in Germany and Belgium. Turnaround was below average because the lot arrived already sorted by pallet."),
+        les: T("Een partij die al op pallet gesorteerd is, scheelt dagen in het magazijn. De radar telt de staat van sortering sinds dit dossier mee in de kansscore.",
+               "A lot that arrives already sorted by pallet saves days in the warehouse. Since this file the radar counts the state of sorting in the opportunity score."),
+        partijen: [T("Importeur, bekend sinds 2019", "Importer, known since 2019")],
+        contact: T("Inkoopmanager importeur", "Buying manager, importer"), telefoon: null, bronnen: []
+      },
+      {
+        id: "meubelketen-2025", jaar: "2025", titel: T("Meubelketen · voorraad van negen filialen", "Furniture chain · stock from nine branches"),
+        soort: T("Bedrijfsbeëindiging", "Business closure"), afloop: "goed", demo: true,
+        kort: T("Keten stopte ermee en wilde in één keer van de winkelvoorraad af. Negen vestigingen leeggehaald in elf werkdagen.",
+                "The chain wound down and wanted the shop stock gone in one go. Nine branches cleared in eleven working days."),
+        detail: T("Inkoop € 640.000, opbrengst € 905.000. Het grootste deel ging naar de eigen warenhuizen, de restanten via een loodsverkoop in Dokkum. Twee vestigingen bleken meer showmodellen te hebben dan opgegeven; dat is in de nacalculatie verrekend.",
+                  "Purchase € 640,000, proceeds € 905,000. Most went to the group's own department stores, the remainder through a warehouse sale in Dokkum. Two branches turned out to hold more display models than declared; that was settled in the final calculation."),
+        les: T("Tel showmodellen apart: ze staan zelden goed in de opgave en verkopen trager. Sinds dit dossier gaat er iemand kijken vóór het bod, niet erna.",
+               "Count display models separately: they are rarely stated correctly and sell more slowly. Since this file someone inspects before the bid, not after."),
+        partijen: [T("Directie van de keten", "Management of the chain"), T("Verhuurders van de panden", "Landlords of the premises")],
+        contact: T("Bedrijfsleider, hoofdkantoor", "Operations manager, head office"), telefoon: null, bronnen: []
+      },
+      {
+        id: "bouwmarkt-rook-2025", jaar: "2025", titel: T("Bouwmarkt · rookschade na brand in het DC", "DIY chain · smoke damage after a fire in the DC"),
+        soort: T("Brand-/waterschade", "Fire / water damage"), afloop: "gemengd", demo: true,
+        kort: T("Verzekeraar zocht een koper voor de non-food met rookschade. Een deel bleek onverkoopbaar en moest alsnog worden afgevoerd.",
+                "The insurer was looking for a buyer for smoke-damaged non-food. Part of it turned out to be unsellable and had to be disposed of after all."),
+        detail: T("Inkoop € 275.000 voor de hele partij. Ongeveer 18% is uiteindelijk afgevoerd omdat de geur er niet uitging; de rest bracht € 392.000 op. Netto bleef er marge over, maar minder dan geraamd, en de afvoerkosten waren niet ingecalculeerd.",
+                  "Purchase € 275,000 for the whole lot. Roughly 18% was eventually disposed of because the smell would not come out; the rest returned € 392,000. There was margin left, but less than estimated, and the disposal costs had not been budgeted."),
+        les: T("Bij rookschade telt de geur zwaarder dan de zichtbare schade. Sinds dit dossier gaat er een steekproef van tien dozen mee vóór het bod, en staan afvoerkosten standaard in de calculatie.",
+               "With smoke damage the smell matters more than the visible damage. Since this file a sample of ten boxes is taken before the bid, and disposal costs are standard in the calculation."),
+        partijen: [T("Verzekeraar van de keten", "Insurer of the chain"), T("Schade-expert", "Loss adjuster")],
+        contact: T("Schadebehandelaar verzekeraar", "Claims handler, insurer"), telefoon: null, bronnen: []
+      },
+      {
+        id: "textiel-de-2026", jaar: "2026", titel: T("Textielpartij Niedersachsen · 1.100 pallets", "Textile lot in Lower Saxony · 1,100 pallets"),
+        soort: T("Fabriekspartij (DE)", "Factory lot (DE)"), afloop: "goed", demo: true,
+        kort: T("Duitse leverancier stopte met een productlijn. Elf vrachten, in twee weken opgehaald en grotendeels binnen het seizoen doorverkocht.",
+                "A German supplier discontinued a product line. Eleven loads, collected in two weeks and largely resold within the season."),
+        detail: T("Inkoop € 218.000, opbrengst € 331.000. Het transport was hier de grootste kostenpost: elf ritten Leeuwarden - Oldenburg. Doordat het bod dezelfde dag lag, kwam de partij niet op de markt en was er geen concurrentie.",
+                  "Purchase € 218,000, proceeds € 331,000. Transport was the largest cost here: eleven runs Leeuwarden to Oldenburg. Because the bid was in the same day, the lot never reached the market and there was no competition."),
+        les: T("Duitse leveranciers gunnen aan wie het snelst antwoordt, niet aan wie het meest biedt. Daarom staat de Duitse monitor sinds dit dossier op dezelfde voet als de Nederlandse.",
+               "German suppliers award to whoever answers fastest, not to whoever bids most. That is why the German monitor has been on the same footing as the Dutch one since this file."),
+        partijen: [T("Vertriebsleitung van de fabrikant", "Vertriebsleitung of the manufacturer")],
+        contact: T("Vertriebsleitung, fabrikant", "Vertriebsleitung, manufacturer"), telefoon: null, bronnen: []
+      },
+      {
+        id: "elektronica-2025", jaar: "2025", titel: T("Elektronicaretouren · 3.400 stuks", "Electronics returns · 3,400 units"),
+        soort: T("Retouren", "Returns"), afloop: "tegenvaller", demo: true,
+        kort: T("Retourenstroom van een webshop, gekocht op basis van een steekproef. Het defectpercentage lag in werkelijkheid twee keer zo hoog.",
+                "A returns flow from a webshop, bought on the basis of a sample. The actual defect rate turned out to be twice as high."),
+        detail: T("Inkoop € 96.000. In de steekproef werkte 82% van de apparaten; over de hele partij bleek dat 61%. Wat overbleef ging met een smalle marge weg, en de reparatie- en afvoerkosten aten de rest op. Per saldo een klein verlies.",
+                  "Purchase € 96,000. In the sample 82% of the devices worked; across the whole lot it was 61%. What was left went out on a thin margin, and repair and disposal costs ate the rest. On balance a small loss."),
+        les: T("Bij elektronica zegt één steekproef niets: retouren worden vaak per batch gesorteerd, en de goede batch ligt bovenop. Sinds dit dossier wordt er uit drie verschillende pallets getest en gaat er niets meer op één steekproef.",
+               "With electronics one sample says nothing: returns are often sorted per batch, and the good batch sits on top. Since this file testing is done from three different pallets and nothing goes on a single sample."),
+        partijen: [T("Logistiek manager webshop", "Logistics manager of the webshop")],
+        contact: T("Logistiek manager webshop", "Logistics manager of the webshop"), telefoon: null, bronnen: []
+      },
+      {
         id: "casa-antwerpen", jaar: "2025", titel: T("CASA · 20+ containers uit Antwerpen", "CASA · 20+ containers from Antwerp"),
         soort: T("Faillissementsvoorraad", "Bankruptcy stock"), afloop: "gemengd",
         kort: T("Voorraad van CASA, een voormalig Blokker-onderdeel, opgehaald in Antwerpen en gekoppeld aan een afnameregeling van achttien maanden.",
@@ -202,7 +262,8 @@
           '<span class="flex flex-wrap items-center gap-2">' +
             '<span class="border ' + a.stijl + ' px-2 py-1 text-[9px] font-bold uppercase tracking-[0.1em]">' + T(a.nl, a.en) + '</span>' +
             '<span class="text-[10px] font-bold uppercase tracking-[0.1em] text-slate-500">' + d.soort + '</span>' +
-            '<span class="text-[11px] text-slate-400">' + d.jaar + '</span></span>' +
+            '<span class="text-[11px] text-slate-400">' + d.jaar + '</span>' +
+            (d.demo ? '<span class="border border-slate-300 bg-slate-50 px-2 py-1 text-[9px] font-bold uppercase tracking-[0.1em] text-slate-500">' + T("Intern dossier", "Internal file") + '</span>' : '') + '</span>' +
           '<span class="mt-2 block text-[15px] font-semibold text-[#13263a]">' + d.titel + '</span>' +
           '<span class="mt-1.5 block max-w-3xl text-[12px] leading-5 text-[#010b22]/65">' + d.kort + '</span>' +
         '</span>' +
@@ -228,9 +289,13 @@
                   T("Bellen", "Call") + '</button>') +
             '</div></div>' +
           '<div class="border border-slate-200 bg-white p-4"><p class="' + LBL + '">' + T("Bronnen", "Sources") + '</p>' +
-            '<ul class="mt-2 text-[12px] leading-6">' + d.bronnen.map(function (b) {
-              return '<li><a href="' + b[1] + '" target="_blank" rel="noopener noreferrer" class="font-semibold text-[#2f6f8f] underline decoration-dotted underline-offset-2">' + b[0] + '</a></li>';
-            }).join("") + '</ul></div>' +
+            (d.bronnen.length
+              ? '<ul class="mt-2 text-[12px] leading-6">' + d.bronnen.map(function (b) {
+                  return '<li><a href="' + b[1] + '" target="_blank" rel="noopener noreferrer" class="font-semibold text-[#2f6f8f] underline decoration-dotted underline-offset-2">' + b[0] + '</a></li>';
+                }).join("") + '</ul>'
+              : '<p class="mt-2 text-[12px] leading-5 text-slate-500">' +
+                T("Eigen dossier, niet in de pers verschenen. Stukken liggen in de dataroom.",
+                  "Internal file, never reported in the press. Documents are in the data room.") + '</p>') + '</div>' +
         '</div></div>' : '') +
     '</article>';
   }

@@ -3,10 +3,11 @@
 (function () {
   var T = function (nl, en) { return (window.__EK_T ? window.__EK_T(nl, en) : nl); };
 
-  /* Panden in oude binnensteden met monumentale status of een monumentaal casco. */
-  var IDS = ["restaurant-ode", "hotel-abdij", "fonteinkerk", "dockumer-sluys", "kb-food",
-             "haagens-dokkum", "club33", "hbs-harlingen", "blockhouse", "grand-cafe-wald",
-             "eye-vastgoed", "amsterdam-jordaan", "boumanschool", "trije-hus", "noarderstek"];
+  /* Panden in oude binnensteden met monumentale status of een monumentaal casco.
+     Nieuwbouw (Dockumer Sluys, Noarderstek) en Blockhouse staan hier bewust niet in. */
+  var IDS = ["restaurant-ode", "hotel-abdij", "fonteinkerk", "kb-food",
+             "haagens-dokkum", "club33", "hbs-harlingen", "grand-cafe-wald",
+             "eye-vastgoed", "amsterdam-jordaan", "boumanschool", "trije-hus", "happy-wok"];
 
   var ICON =
     '<svg viewBox="0 0 24 24" width="11" height="11" aria-hidden="true" fill="none" ' +
