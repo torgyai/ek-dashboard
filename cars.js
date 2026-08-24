@@ -156,7 +156,7 @@
     '</article>';
   }
 
-  window.__EK_CARS__ = {
+  var API = {
     click: function (e) {
       var s = e.target.closest("[data-ek-car-send]");
       if (s) { verstuurd[s.getAttribute("data-ek-car-send")] = s.getAttribute("data-ek-garage"); keuze = null; return true; }
@@ -182,7 +182,8 @@
         [T("Snelste naar 100", "Quickest to 100"), snelste.sprint, snelste.merk + " " + snelste.model],
         [T("Totale kilometerstand", "Total mileage"), NUM(A.reduce(function (s, a) { return s + a.km; }, 0)) + " km", T("over alle auto's", "across all cars")]
       ];
-      return '<section class="mt-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-5">' + kpi.map(function (k) {
+      return kop() +
+      '<section class="mt-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-5">' + kpi.map(function (k) {
         return '<article class="border border-[#d9ddd6] bg-white p-5"><p class="' + LBL + '">' + k[0] + '</p>' +
           '<p class="mt-3 text-[22px] font-semibold tracking-[-0.05em] text-[#13263a]">' + k[1] + '</p>' +
           '<p class="mt-1 text-[11px] leading-4 text-slate-500">' + k[2] + '</p></article>';
@@ -193,4 +194,42 @@
         "Values are indicative and based on the latest fleet policy. Sending forwards the service request to Autobedrijf Lijzenga, SPD Automotive or Autodijk; nothing is ordered or paid automatically.") + '</p>';
     }
   };
+
+  function kop() {
+    return '<section class="flex flex-col gap-5 border-b border-slate-300 pb-5 md:flex-row md:items-end md:justify-between">' +
+      '<div><p class="' + LBL + '">' + T("Privé · vloot", "Personal · fleet") + '</p>' +
+      '<h2 class="mt-2 text-[32px] font-semibold tracking-[-0.055em] text-[#13263a]">Car Collection</h2>' +
+      '<p class="mt-2 max-w-2xl text-[12px] leading-5 text-[#010b22]/65">' +
+      T("De eigen collectie, van de dagelijkse werkauto tot de klassiekers in de stalling. Klik een auto open voor de details en om hem door te sturen naar het autobedrijf.",
+        "The collection, from the daily workhorse to the classics in storage. Open a car for the details and to send it to a garage.") + '</p></div>' +
+      '<span class="border border-slate-300 bg-white px-3 py-2 text-[10px] font-bold uppercase tracking-[0.12em] text-slate-500">' +
+      T("Vlootpolis · laatste taxatie mei 2026", "Fleet policy · last valuation May 2026") + '</span></section>';
+  }
+
+  window.__EK_CARS__ = API;
+
+  function vul() {
+    var root = document.getElementById("ek-cars-root");
+    if (!root) return;
+    var stempel = (window.__EK_LANG ? window.__EK_LANG() : "nl") + "|" + API.stempel();
+    if (root.dataset.gevuld === stempel) return;
+    root.dataset.gevuld = stempel;
+    root.innerHTML = API.html();
+    if (!root.dataset.klik) {
+      root.dataset.klik = "1";
+      root.addEventListener("click", function (e) { if (API.click(e)) vul(); });
+    }
+  }
+  function start() {
+    if (!document.body) return setTimeout(start, 20);
+    vul();
+    if (window.__EK_ONLANG) window.__EK_ONLANG(vul);
+    var wacht = false;
+    new MutationObserver(function () {
+      if (wacht) return;
+      wacht = true;
+      requestAnimationFrame(function () { wacht = false; vul(); });
+    }).observe(document.body, { childList: true, subtree: true });
+  }
+  start();
 })();

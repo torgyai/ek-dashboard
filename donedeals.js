@@ -6,6 +6,7 @@
   var LBL = "text-[9px] font-bold uppercase tracking-[0.13em] text-slate-500";
   var open = null;
   var filter = "alle";
+  var gebeld = {};
 
   function deals() {
     return [
@@ -40,20 +41,6 @@
                   ["Wonen360", "https://www.wonen360.nl/article/9693347/45-franchisenemers-blokker-bereiken-akkoord-met-ondernemer-eric-kooistra/"]]
       },
       {
-        id: "blokker-krimp", jaar: "2025", titel: T("Doorstart Blokker krimpt: 12 van de 45 blijven", "Blokker restart shrinks: 12 of 45 stay"),
-        soort: T("Afzetkanaal", "Offtake channel"), afloop: "tegenvaller",
-        kort: T("Van de 45 zelfstandige Blokker-ondernemers koos er uiteindelijk maar een handvol voor voortzetting onder de naam. Het kanaal waarop de partij was uitgerekend, werd fors kleiner.",
-                "Of the 45 independent Blokker shopkeepers only a handful eventually continued under the name. The channel the lot had been calculated on became much smaller."),
-        detail: T("Bij de deadline van 15 juli 2025 gingen twaalf ondernemers door onder Blokker; de rest stapte over naar Marskramer of onderzocht een eigen coöperatie. De keten hield 48 winkels over, tegen ruwweg 400 vóór het faillissement. Let op: de berichtgeving over deze krimp noemt Kooistra zelf niet - het verband met zijn afzet is een gevolgtrekking, geen bronclaim.",
-                  "At the 15 July 2025 deadline twelve shopkeepers continued under Blokker; the rest moved to Marskramer or explored their own cooperative. The chain was left with 48 shops against roughly 400 before the bankruptcy. Note: the reporting on this shrinkage does not mention Kooistra itself; the link to his offtake is an inference, not a claim in the source."),
-        les: T("Eén afnemer is één risico. De radar markeert sindsdien partijen waarvan meer dan de helft van de afzet bij één keten ligt.",
-               "One buyer is one risk. The radar now flags lots where more than half the offtake sits with a single chain."),
-        partijen: ["Blokker", "Marskramer"],
-        contact: T("Woordvoering Blokker", "Blokker press office"), telefoon: null,
-        bronnen: [["NOS", "https://nos.nl/artikel/2575189"],
-                  ["MT/Sprout", "https://mtsprout.nl/nieuws/blokker-verliest-meeste-franchisewinkels-airweave-scoort-6-miljoen"]]
-      },
-      {
         id: "casa-antwerpen", jaar: "2025", titel: T("CASA · 20+ containers uit Antwerpen", "CASA · 20+ containers from Antwerp"),
         soort: T("Faillissementsvoorraad", "Bankruptcy stock"), afloop: "gemengd",
         kort: T("Voorraad van CASA, een voormalig Blokker-onderdeel, opgehaald in Antwerpen en gekoppeld aan een afnameregeling van achttien maanden.",
@@ -82,7 +69,7 @@
       },
       {
         id: "loombands", jaar: T("circa 2015", "around 2015"), titel: T("Loombands · 44 trailers die bleven liggen", "Loom bands · 44 trailers that sat still"),
-        soort: T("Hype-restant", "Fad residue"), afloop: "gemengd",
+        soort: T("Hype-restant", "Fad residue"), afloop: "tegenvaller",
         kort: T("Vierenveertig trailers loombands, gekocht toen de rage al over haar hoogtepunt was. Ze lagen jaren in het magazijn voordat ze alsnog met winst weg konden.",
                 "Forty-four trailers of loom bands, bought when the craze was already past its peak. They sat in the warehouse for years before eventually moving at a profit."),
         detail: T("In het profiel in de Leeuwarder Courant genoemd als voorbeeld van een partij die veel te lang bleef liggen. Uiteindelijk alsnog met winst verkocht, maar de rentelast en de magazijnruimte hebben jaren gekost.",
@@ -233,9 +220,13 @@
               : '<p class="mt-2 text-[12px] text-slate-500">' + T("Niet in de bronnen genoemd.", "Not named in the sources.") + '</p>') +
             '<p class="mt-3 ' + LBL + '">' + T("Contactpersoon", "Contact") + '</p>' +
             '<p class="mt-1 text-[12px] text-[#13263a]">' + (d.contact || T("Niet vastgelegd", "Not recorded")) + '</p>' +
-            '<p class="mt-3 ' + LBL + '">' + T("Telefoon", "Phone") + '</p>' +
-            '<p class="mt-1 text-[12px] ' + (d.telefoon ? 'text-[#13263a]' : 'text-slate-500') + '">' +
-              (d.telefoon || T("Nog niet in het dossier", "Not yet in the file")) + '</p></div>' +
+            '<div class="mt-3">' +
+              (gebeld[d.id]
+                ? '<p class="border border-[#bfddd4] bg-[#edf8f4] px-3 py-2 text-[11px] font-bold uppercase tracking-[0.1em] text-[#0f625b]">' +
+                  T("Gebeld · ", "Called · ") + gebeld[d.id] + '</p>'
+                : '<button type="button" data-ek-bel="' + d.id + '" class="inline-flex items-center gap-2 border border-[#010b22] bg-[#010b22] px-4 py-2.5 text-[10px] font-bold uppercase tracking-[0.12em] text-white">' +
+                  T("Bellen", "Call") + '</button>') +
+            '</div></div>' +
           '<div class="border border-slate-200 bg-white p-4"><p class="' + LBL + '">' + T("Bronnen", "Sources") + '</p>' +
             '<ul class="mt-2 text-[12px] leading-6">' + d.bronnen.map(function (b) {
               return '<li><a href="' + b[1] + '" target="_blank" rel="noopener noreferrer" class="font-semibold text-[#2f6f8f] underline decoration-dotted underline-offset-2">' + b[0] + '</a></li>';
@@ -247,7 +238,15 @@
   window.__EK_DONEDEALS__ = {
     setFilter: function (f) { filter = f; open = null; },
     toggle: function (id) { open = open === id ? null : id; },
-    stempel: function () { return filter + "|" + open; },
+    click: function (e) {
+      var b = e.target.closest("[data-ek-bel]");
+      if (!b) return false;
+      var d = new Date();
+      gebeld[b.getAttribute("data-ek-bel")] =
+        T("vandaag om ", "today at ") + String(d.getHours()).padStart(2, "0") + ":" + String(d.getMinutes()).padStart(2, "0");
+      return true;
+    },
+    stempel: function () { return filter + "|" + open + "|" + Object.keys(gebeld).join(","); },
     html: function () {
       var D = deals();
       var tel = function (k) { return D.filter(function (d) { return d.afloop === k; }).length; };
@@ -272,11 +271,7 @@
           knop("gemengd", T("Gemengd", "Mixed"), tel("gemengd")) +
           knop("tegenvaller", T("Tegenvallers", "Setbacks"), tel("tegenvaller")) +
         '</div>' +
-        zicht.map(rij).join("") +
-        '<div class="border-t border-slate-200 p-5"><p class="text-[11px] leading-5 text-slate-500">' +
-        T("De feiten hierboven komen uit openbare berichtgeving; per dossier staan de bronnen erbij. Telefoonnummers worden alleen bewaard als ze daadwerkelijk gebruikt zijn, ze worden niet verzonnen en niet uit externe bestanden bijgekocht.",
-          "The facts above come from public reporting; the sources are listed per file. Phone numbers are stored only once they have actually been used; they are never invented and never bought in from external files.") +
-        '</p></div></section>';
+        zicht.map(rij).join("") + '</section>';
     }
   };
 })();

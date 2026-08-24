@@ -216,13 +216,11 @@
       '</div></section>' +
 
     tabbalk() +
-    (tab === "deals" ? (window.__EK_DONEDEALS__ ? window.__EK_DONEDEALS__.html() : "")
-     : tab === "cars" ? (window.__EK_CARS__ ? window.__EK_CARS__.html() : "")
-     : radarView());
+    (tab === "deals" ? (window.__EK_DONEDEALS__ ? window.__EK_DONEDEALS__.html() : "") : radarView());
   }
 
   function tabbalk() {
-    var t = [["radar", T("Dealradar", "Deal radar")], ["deals", "Done Deals"], ["cars", "Car Collection"]];
+    var t = [["radar", T("Dealradar", "Deal radar")], ["deals", "Done Deals"]];
     return '<section class="mt-5 flex flex-wrap gap-2">' + t.map(function (x) {
       return '<button type="button" data-ek-ktab="' + x[0] + '" class="border px-4 py-2.5 text-[10px] font-bold uppercase tracking-[0.12em] ' +
         (tab === x[0] ? 'border-[#010b22] bg-[#010b22] text-white' : 'border-slate-300 bg-white text-[#13263a]') + '">' + x[1] + '</button>';
@@ -293,8 +291,7 @@
     if (!root) return;
     var taal = window.__EK_LANG ? window.__EK_LANG() : "nl";
     var stempel = [taal, tab,
-      window.__EK_DONEDEALS__ ? window.__EK_DONEDEALS__.stempel() : "",
-      window.__EK_CARS__ ? window.__EK_CARS__.stempel() : ""].join("|");
+      window.__EK_DONEDEALS__ ? window.__EK_DONEDEALS__.stempel() : ""].join("|");
     if (root.dataset.gevuld === stempel) return;
     root.dataset.gevuld = stempel;
     root.innerHTML = html();
@@ -303,7 +300,7 @@
       root.addEventListener("click", function (e) {
         var t = e.target.closest("[data-ek-ktab]");
         if (t) { tab = t.getAttribute("data-ek-ktab"); return vul(); }
-        if (window.__EK_CARS__ && window.__EK_CARS__.click(e)) return vul();
+        if (window.__EK_DONEDEALS__ && window.__EK_DONEDEALS__.click(e)) return vul();
         var f = e.target.closest("[data-ek-dealfilter]");
         if (f && window.__EK_DONEDEALS__) { window.__EK_DONEDEALS__.setFilter(f.getAttribute("data-ek-dealfilter")); return vul(); }
         var d = e.target.closest("[data-ek-deal]");

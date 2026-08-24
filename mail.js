@@ -8,6 +8,12 @@
   var geopend = null;
   var concepten = {};
   var doorgestuurd = {};
+  var bewerkt = {};
+  function tekstVan(m) {
+    if (bewerkt[m.id] !== undefined) return bewerkt[m.id];
+    var n = concepten[m.id] || 1;
+    return (n % 2 === 0 && m.concept2) ? m.concept2 : m.concept;
+  }
 
   function berichten() {
     return [
@@ -19,8 +25,10 @@
         ai: T("Kans met een harde deadline vandaag. De radar schat de partij op € 620k; een vergelijkbaar dossier uit 2024 leverde 31% marge. Zonder bod vóór 17:00 vervalt de kans.",
               "Opportunity with a hard deadline today. The radar values the lot at € 620k; a comparable 2024 file returned a 31% margin. Without a bid before 17:00 the chance lapses."),
         actie: T("Bod uitbrengen of afzien", "Place a bid or decline"),
-        concept: T("Beste heer Van Dijk,\n\nDank voor de aanmelding. Wij zijn geïnteresseerd in de volledige partij, in één koop en zonder voorbehoud van financiering.\n\nWij bieden een vast bedrag voor de complete inventaris van alle vier de vestigingen, af te halen binnen tien werkdagen na gunning, in eigen vervoer en met eigen personeel. De panden leveren wij bezemschoon op.\n\nGraag hoor ik vandaag of dit werkbaar is; dan sturen wij het bod vóór 17:00 formeel per mail.\n\nMet vriendelijke groet,\nEric Kooistra\nKooistra.com",
-                   "Dear mr Van Dijk,\n\nThank you for the notice. We are interested in the entire lot, in a single purchase and without a financing condition.\n\nWe offer a fixed amount for the complete inventory of all four branches, collected within ten working days of award, with our own transport and staff. We hand the premises back swept clean.\n\nPlease let me know today whether this works; we will then send the formal bid before 17:00.\n\nKind regards,\nEric Kooistra\nKooistra.com") },
+        concept: T("Beste heer Van Dijk,\n\nDank voor de aanmelding. Wij zijn geïnteresseerd in de volledige partij, in één koop en zonder voorbehoud van financiering.\n\nWij bieden een vast bedrag voor de complete inventaris van alle vier de vestigingen, af te halen binnen tien werkdagen na gunning, in eigen vervoer en met eigen personeel. De panden leveren wij bezemschoon op.\n\nGraag hoor ik vandaag of dit werkbaar is; dan sturen wij het bod vóór 17:00 formeel per mail.\n\nMet vriendelijke groeten,\nMit freundlichen Grüßen\nKind Regards,\n\nEric Kooistra\n+31 6 54221199",
+                   "Dear mr Van Dijk,\n\nThank you for the notice. We are interested in the entire lot, in a single purchase and without a financing condition.\n\nWe offer a fixed amount for the complete inventory of all four branches, collected within ten working days of award, with our own transport and staff. We hand the premises back swept clean.\n\nPlease let me know today whether this works; we will then send the formal bid before 17:00.\n\nMet vriendelijke groeten,\nMit freundlichen Grüßen\nKind Regards,\n\nEric Kooistra\n+31 6 54221199") ,
+        concept2: T("Beste heer Van Dijk,\n\nWij bieden op de volledige partij, alle vier de vestigingen in één koop, zonder voorbehoud van financiering. Ophalen binnen tien werkdagen na gunning, eigen vervoer, eigen personeel, panden bezemschoon terug.\n\nOns bod ligt vóór 17:00 bij u. Als er nog stukken zijn die ik moet zien, hoor ik dat graag vanochtend.\n\nMet vriendelijke groeten,\nMit freundlichen Grüßen\nKind Regards,\n\nEric Kooistra\n+31 6 54221199",
+                    "Dear mr Van Dijk,\n\nWe bid on the entire lot, all four branches in one purchase, without a financing condition. Collection within ten working days of award, our own transport and staff, premises handed back swept clean.\n\nOur bid will be with you before 17:00. If there are documents I should see first, I would like to hear that this morning.\n\nMet vriendelijke groeten,\nMit freundlichen Grüßen\nKind Regards,\n\nEric Kooistra\n+31 6 54221199") },
 
       { id: "m2", van: "Gemeente Noardeast-Fryslân", adres: "omgeving@noardeast-fryslan.nl", tijd: "08:20",
         onderwerp: T("Ontvangstbevestiging aanvraag OMG-2026-04471", "Acknowledgement of application OMG-2026-04471"),
@@ -30,8 +38,10 @@
         ai: T("Hoort bij het horecaplein (Sense × Brouwerij Dockum). Het akoestisch onderzoek is de enige ontbrekende bijlage; zonder dat stuk gaat de beslistermijn niet lopen.",
               "Relates to the hospitality square (Sense × Brouwerij Dockum). The acoustic survey is the only missing attachment; without it the decision period does not start."),
         actie: T("Akoestisch bureau opdracht geven", "Instruct an acoustics consultant"),
-        concept: T("Geachte heer/mevrouw,\n\nDank voor de bevestiging. Het akoestisch onderzoek is inmiddels uitgezet; wij verwachten het rapport binnen drie weken aan te kunnen leveren.\n\nMocht u in de tussentijd nog stukken missen, dan hoor ik dat graag in één keer, zodat we de aanvraag in één ronde compleet krijgen.\n\nMet vriendelijke groet,\nEric Kooistra\nEYE Vastgoed B.V.",
-                   "Dear sir or madam,\n\nThank you for the acknowledgement. The acoustic survey has been commissioned; we expect to submit the report within three weeks.\n\nIf any other documents are missing, I would appreciate hearing it in one go so we can complete the application in a single round.\n\nKind regards,\nEric Kooistra\nEYE Vastgoed B.V.") },
+        concept: T("Geachte heer/mevrouw,\n\nDank voor de bevestiging. Het akoestisch onderzoek is inmiddels uitgezet; wij verwachten het rapport binnen drie weken aan te kunnen leveren.\n\nMocht u in de tussentijd nog stukken missen, dan hoor ik dat graag in één keer, zodat we de aanvraag in één ronde compleet krijgen.\n\nMet vriendelijke groeten,\nMit freundlichen Grüßen\nKind Regards,\n\nEric Kooistra\n+31 6 54221199",
+                   "Dear sir or madam,\n\nThank you for the acknowledgement. The acoustic survey has been commissioned; we expect to submit the report within three weeks.\n\nIf any other documents are missing, I would appreciate hearing it in one go so we can complete the application in a single round.\n\nMet vriendelijke groeten,\nMit freundlichen Grüßen\nKind Regards,\n\nEric Kooistra\n+31 6 54221199") ,
+        concept2: T("Geachte heer/mevrouw,\n\nHet akoestisch onderzoek is uitgezet en volgt binnen drie weken.\n\nMocht er daarnaast nog iets ontbreken, laat het dan in één keer weten, dan maken we de aanvraag in één ronde compleet.\n\nMet vriendelijke groeten,\nMit freundlichen Grüßen\nKind Regards,\n\nEric Kooistra\n+31 6 54221199",
+                    "Dear sir or madam,\n\nThe acoustic survey has been commissioned and will follow within three weeks.\n\nIf anything else is missing, please let me know in one go so we can complete the application in a single round.\n\nMet vriendelijke groeten,\nMit freundlichen Grüßen\nKind Regards,\n\nEric Kooistra\n+31 6 54221199") },
 
       { id: "m3", van: T("Jelke · Synergy Installatietechniek", "Jelke · Synergy Installatietechniek"), adres: "jelke@synergy-installatie.nl", tijd: "07:58",
         onderwerp: T("Planning storingen week 36 - vier objecten", "Scheduling breakdowns week 36 - four assets"),
@@ -41,8 +51,10 @@
         ai: T("Vier werkorders in één rit scheelt ongeveer een halve dag voorrijden. Alleen bij Frisia House Lemmer moet de huurder toegang regelen.",
               "Four work orders in one run saves roughly half a day of travel. Only at Frisia House Lemmer does the tenant need to arrange access."),
         actie: T("Toegang bevestigen bij de huurders", "Confirm access with the tenants"),
-        concept: T("Hoi,\n\nPrima, doe donderdag maar in één ronde. Ik regel vandaag de toegang bij Frisia House Lemmer; de andere drie zijn vrij toegankelijk.\n\nAls er iets tegenvalt aan de installatie, bel me dan even voordat je doorpakt - dan beslissen we meteen of het Bouwteam het overneemt.\n\nGroet,\nEric",
-                   "Hi,\n\nFine, do it all in one run on Thursday. I will arrange access at Frisia House Lemmer today; the other three are freely accessible.\n\nIf anything looks worse than expected, call me before you carry on - then we decide straight away whether the Bouwteam takes it over.\n\nBest,\nEric") },
+        concept: T("Hoi,\n\nPrima, doe donderdag maar in één ronde. Ik regel vandaag de toegang bij Frisia House Lemmer; de andere drie zijn vrij toegankelijk.\n\nAls er iets tegenvalt aan de installatie, bel me dan even voordat je doorpakt - dan beslissen we meteen of het Bouwteam het overneemt.\n\nMet vriendelijke groeten,\nMit freundlichen Grüßen\nKind Regards,\n\nEric Kooistra\n+31 6 54221199",
+                   "Hi,\n\nFine, do it all in one run on Thursday. I will arrange access at Frisia House Lemmer today; the other three are freely accessible.\n\nIf anything looks worse than expected, call me before you carry on - then we decide straight away whether the Bouwteam takes it over.\n\nMet vriendelijke groeten,\nMit freundlichen Grüßen\nKind Regards,\n\nEric Kooistra\n+31 6 54221199") ,
+        concept2: T("Hoi Jelke,\n\nDoen. Donderdag in één ronde, ik regel de toegang bij Frisia House Lemmer.\n\nValt het tegen bij de installatie, bel me dan eerst; dan bepalen we meteen of het Bouwteam het overneemt.\n\nMet vriendelijke groeten,\nMit freundlichen Grüßen\nKind Regards,\n\nEric Kooistra\n+31 6 54221199",
+                    "Hi Jelke,\n\nAgreed. Thursday in one run, I will arrange access at Frisia House Lemmer.\n\nIf the installation turns out worse than expected, call me first; then we decide straight away whether the Bouwteam takes it over.\n\nMet vriendelijke groeten,\nMit freundlichen Grüßen\nKind Regards,\n\nEric Kooistra\n+31 6 54221199") },
 
       { id: "m4", van: "Achmea Vastgoed - schadebehandeling", adres: "schade@achmeavastgoed.nl", tijd: "gisteren 16:44",
         onderwerp: T("Club33 - tweede termijn na gereedmelding", "Club33 - second instalment after completion notice"),
@@ -52,8 +64,10 @@
         ai: T("Deze vraag ligt er negen dagen. De tweede termijn van € 490.000 blijft geblokkeerd zolang de planning ontbreekt. Dit is de duurste openstaande follow-up in de mailbox.",
               "This request has been open for nine days. The second instalment of € 490,000 stays blocked while the schedule is missing. It is the most expensive open follow-up in the mailbox."),
         actie: T("Herbouwplanning sturen", "Send the rebuild schedule"),
-        concept: T("Geachte heer/mevrouw,\n\nExcuses voor de vertraging. De vergunning is verleend en de start bouw staat gepland in het vierde kwartaal van dit jaar, met oplevering in het tweede kwartaal van 2027.\n\nIk stuur de planning van de aannemer vandaag mee als bijlage. Graag verneem ik daarna wanneer de tweede termijn in behandeling wordt genomen.\n\nMet vriendelijke groet,\nEric Kooistra\nEYE Vastgoed B.V.",
-                   "Dear sir or madam,\n\nApologies for the delay. The permit has been granted and construction is planned to start in the fourth quarter of this year, with completion in the second quarter of 2027.\n\nI am attaching the contractor's schedule today. I would then like to know when the second instalment will be processed.\n\nKind regards,\nEric Kooistra\nEYE Vastgoed B.V.") },
+        concept: T("Geachte heer/mevrouw,\n\nExcuses voor de vertraging. De vergunning is verleend en de start bouw staat gepland in het vierde kwartaal van dit jaar, met oplevering in het tweede kwartaal van 2027.\n\nIk stuur de planning van de aannemer vandaag mee als bijlage. Graag verneem ik daarna wanneer de tweede termijn in behandeling wordt genomen.\n\nMet vriendelijke groeten,\nMit freundlichen Grüßen\nKind Regards,\n\nEric Kooistra\n+31 6 54221199",
+                   "Dear sir or madam,\n\nApologies for the delay. The permit has been granted and construction is planned to start in the fourth quarter of this year, with completion in the second quarter of 2027.\n\nI am attaching the contractor's schedule today. I would then like to know when the second instalment will be processed.\n\nMet vriendelijke groeten,\nMit freundlichen Grüßen\nKind Regards,\n\nEric Kooistra\n+31 6 54221199") ,
+        concept2: T("Geachte heer/mevrouw,\n\nBijgaand de planning van de aannemer: start bouw in het vierde kwartaal van dit jaar, oplevering in het tweede kwartaal van 2027. De vergunning is verleend.\n\nGraag verneem ik per omgaande wanneer de tweede termijn wordt vrijgegeven; het dossier ligt nu negen dagen stil.\n\nMet vriendelijke groeten,\nMit freundlichen Grüßen\nKind Regards,\n\nEric Kooistra\n+31 6 54221199",
+                    "Dear sir or madam,\n\nAttached is the contractor schedule: construction starts in the fourth quarter of this year, completion in the second quarter of 2027. The permit has been granted.\n\nI would like to know by return when the second instalment will be released; the file has been idle for nine days.\n\nMet vriendelijke groeten,\nMit freundlichen Grüßen\nKind Regards,\n\nEric Kooistra\n+31 6 54221199") },
 
       { id: "m5", van: T("Huurder Zuidhorn 11", "Tenant Zuidhorn 11"), adres: "j.dewit@example.nl", tijd: "gisteren 14:12",
         onderwerp: T("Betalingsregeling huurachterstand", "Payment plan for rent arrears"),
@@ -63,8 +77,10 @@
         ai: T("Voorstel past binnen het incassobeleid: geen post ouder dan 90 dagen en de lopende huur wordt doorbetaald. Vastleggen in een korte regeling voorkomt escalatie.",
               "The proposal fits the collections policy: nothing older than 90 days and the running rent keeps being paid. Recording it in a short agreement prevents escalation."),
         actie: T("Regeling bevestigen en vastleggen", "Confirm and record the arrangement"),
-        concept: T("Beste heer De Wit,\n\nDank voor uw bericht en voor het initiatief. Drie termijnen naast de lopende huur is akkoord.\n\nIk stuur u vandaag een korte bevestiging met de bedragen en de data. Zolang de termijnen en de gewone huur op tijd binnen zijn, ondernemen wij verder geen stappen.\n\nMet vriendelijke groet,\nEric Kooistra",
-                   "Dear mr De Wit,\n\nThank you for your message and for taking the initiative. Three instalments alongside the running rent is agreed.\n\nI will send you a short confirmation today with the amounts and dates. As long as the instalments and the normal rent arrive on time, we will take no further steps.\n\nKind regards,\nEric Kooistra") },
+        concept: T("Beste heer De Wit,\n\nDank voor uw bericht en voor het initiatief. Drie termijnen naast de lopende huur is akkoord.\n\nIk stuur u vandaag een korte bevestiging met de bedragen en de data. Zolang de termijnen en de gewone huur op tijd binnen zijn, ondernemen wij verder geen stappen.\n\nMet vriendelijke groeten,\nMit freundlichen Grüßen\nKind Regards,\n\nEric Kooistra\n+31 6 54221199",
+                   "Dear mr De Wit,\n\nThank you for your message and for taking the initiative. Three instalments alongside the running rent is agreed.\n\nI will send you a short confirmation today with the amounts and dates. As long as the instalments and the normal rent arrive on time, we will take no further steps.\n\nMet vriendelijke groeten,\nMit freundlichen Grüßen\nKind Regards,\n\nEric Kooistra\n+31 6 54221199") ,
+        concept2: T("Beste heer De Wit,\n\nAkkoord met drie termijnen naast de lopende huur. U krijgt vandaag een korte bevestiging met de bedragen en data.\n\nZolang alles op tijd binnenkomt, ondernemen wij geen verdere stappen.\n\nMet vriendelijke groeten,\nMit freundlichen Grüßen\nKind Regards,\n\nEric Kooistra\n+31 6 54221199",
+                    "Dear mr De Wit,\n\nAgreed: three instalments alongside the running rent. You will receive a short confirmation today with the amounts and dates.\n\nAs long as everything arrives on time, we will take no further steps.\n\nMet vriendelijke groeten,\nMit freundlichen Grüßen\nKind Regards,\n\nEric Kooistra\n+31 6 54221199") },
 
       { id: "m6", van: "Dijkstra Draisma", adres: "calculatie@dijkstradraisma.nl", tijd: "gisteren 11:30",
         onderwerp: T("Offerte gevelherstel Achmeatoren - herziene versie", "Quotation façade repair Achmeatoren - revised"),
@@ -74,8 +90,10 @@
         ai: T("Ligt 4% onder de vorige versie. Past binnen het capexplan voor dit object; de post onvoorzien van 7% is marktconform voor gevelwerk aan een hoogbouwpand.",
               "Comes in 4% below the previous version. Fits the capex plan for this asset; the 7% contingency is normal for façade work on a high-rise."),
         actie: T("Gunnen of nog één ronde onderhandelen", "Award or negotiate one more round"),
-        concept: T("Hoi,\n\nDank voor de herziene calculatie, die ziet er beter uit. Twee dingen nog: kunnen jullie het steigerwerk apart specificeren, en wat gebeurt er met het onvoorzien als dat niet wordt gebruikt?\n\nAls we daar uit zijn, kunnen we deze week gunnen.\n\nGroet,\nEric",
-                   "Hi,\n\nThanks for the revised calculation, it looks better. Two things: can you itemise the scaffolding separately, and what happens to the contingency if it is not used?\n\nOnce that is settled we can award this week.\n\nBest,\nEric") },
+        concept: T("Hoi,\n\nDank voor de herziene calculatie, die ziet er beter uit. Twee dingen nog: kunnen jullie het steigerwerk apart specificeren, en wat gebeurt er met het onvoorzien als dat niet wordt gebruikt?\n\nAls we daar uit zijn, kunnen we deze week gunnen.\n\nMet vriendelijke groeten,\nMit freundlichen Grüßen\nKind Regards,\n\nEric Kooistra\n+31 6 54221199",
+                   "Hi,\n\nThanks for the revised calculation, it looks better. Two things: can you itemise the scaffolding separately, and what happens to the contingency if it is not used?\n\nOnce that is settled we can award this week.\n\nMet vriendelijke groeten,\nMit freundlichen Grüßen\nKind Regards,\n\nEric Kooistra\n+31 6 54221199") ,
+        concept2: T("Hoi,\n\nDe herziene calculatie ziet er goed uit. Twee punten voordat we gunnen: specificeer het steigerwerk apart, en leg vast wat er met de post onvoorzien gebeurt als die niet wordt gebruikt.\n\nZijn we daaruit, dan gunnen we deze week.\n\nMet vriendelijke groeten,\nMit freundlichen Grüßen\nKind Regards,\n\nEric Kooistra\n+31 6 54221199",
+                    "Hi,\n\nThe revised calculation looks good. Two points before we award: itemise the scaffolding separately, and set out what happens to the contingency if it is not used.\n\nOnce that is settled we award this week.\n\nMet vriendelijke groeten,\nMit freundlichen Grüßen\nKind Regards,\n\nEric Kooistra\n+31 6 54221199") },
 
       { id: "m7", van: "Rabobank - relatiebeheer", adres: "relatiebeheer@rabobank.nl", tijd: "gisteren 09:05",
         onderwerp: T("Jaarlijkse convenantrapportage 2026", "Annual covenant reporting 2026"),
@@ -85,8 +103,10 @@
         ai: T("Standaardverzoek, maar met een harde datum. LTV staat op 40,0% tegen een grens van 55%, DSCR op 1,82x tegen 1,25x - beide ruim binnen de afspraken.",
               "Routine request, but with a hard date. LTV is 40.0% against a 55% limit and DSCR 1.82x against 1.25x - both comfortably within the agreement."),
         actie: T("Rapportage bij de accountant opvragen", "Request the reporting pack from the accountant"),
-        concept: T("Beste,\n\nDank voor de herinnering. Ik vraag de cijfers deze week bij de accountant op; aanlevering vóór 30 september is haalbaar.\n\nTer indicatie alvast: de LTV komt uit rond 40% en de DSCR rond 1,8x, dus ruim binnen de convenanten.\n\nMet vriendelijke groet,\nEric Kooistra",
-                   "Hello,\n\nThank you for the reminder. I will request the figures from the accountant this week; submission before 30 September is achievable.\n\nAs an early indication: LTV comes out around 40% and DSCR around 1.8x, so comfortably within the covenants.\n\nKind regards,\nEric Kooistra") },
+        concept: T("Beste,\n\nDank voor de herinnering. Ik vraag de cijfers deze week bij de accountant op; aanlevering vóór 30 september is haalbaar.\n\nTer indicatie alvast: de LTV komt uit rond 40% en de DSCR rond 1,8x, dus ruim binnen de convenanten.\n\nMet vriendelijke groeten,\nMit freundlichen Grüßen\nKind Regards,\n\nEric Kooistra\n+31 6 54221199",
+                   "Hello,\n\nThank you for the reminder. I will request the figures from the accountant this week; submission before 30 September is achievable.\n\nAs an early indication: LTV comes out around 40% and DSCR around 1.8x, so comfortably within the covenants.\n\nMet vriendelijke groeten,\nMit freundlichen Grüßen\nKind Regards,\n\nEric Kooistra\n+31 6 54221199") ,
+        concept2: T("Beste,\n\nDe cijfers komen deze week bij de accountant vandaan; aanlevering vóór 30 september is geen probleem.\n\nIndicatief: LTV rond 40%, DSCR rond 1,8x. Beide ruim binnen de convenanten.\n\nMet vriendelijke groeten,\nMit freundlichen Grüßen\nKind Regards,\n\nEric Kooistra\n+31 6 54221199",
+                    "Hello,\n\nThe figures come from the accountant this week; submission before 30 September is no problem.\n\nIndicatively: LTV around 40%, DSCR around 1.8x. Both comfortably within the covenants.\n\nMet vriendelijke groeten,\nMit freundlichen Grüßen\nKind Regards,\n\nEric Kooistra\n+31 6 54221199") },
 
       { id: "m8", van: "Feuerwehr-Pressestelle Emden", adres: "presse@feuerwehr-emden.de", tijd: "gisteren 22:14",
         onderwerp: T("Pressemitteilung: Lagerhallenbrand Emden", "Press release: warehouse fire in Emden"),
@@ -96,8 +116,10 @@
         ai: T("Automatisch opgepikt door de Duitse nieuwsmonitor. Rookschade aan non-food is precies het profiel waar Kooistra op koopt; de verzekeraar schakelt meestal binnen vijf werkdagen een schadepartijkoper in.",
               "Picked up automatically by the German news monitor. Smoke damage to non-food is exactly Kooistra's buying profile; the insurer usually appoints a salvage buyer within five working days."),
         actie: T("Contact zoeken met de verzekeraar", "Approach the insurer"),
-        concept: T("Sehr geehrte Damen und Herren,\n\nwir haben von dem Brand gelesen. Wir kaufen regelmäßig Non-Food-Bestände mit Rauch- oder Wasserschaden auf, komplett und in einem Zug, mit eigenem Transport.\n\nFalls Sie uns an den zuständigen Versicherer oder die Geschäftsleitung verweisen können, wären wir Ihnen dankbar.\n\nMit freundlichen Grüßen\nEric Kooistra\nKooistra.com",
-                   "Dear sir or madam,\n\nWe read about the fire. We regularly buy non-food stock with smoke or water damage, complete and in one go, with our own transport.\n\nIf you could refer us to the insurer or the management involved, we would be grateful.\n\nKind regards,\nEric Kooistra\nKooistra.com") },
+        concept: T("Sehr geehrte Damen und Herren,\n\nwir haben von dem Brand gelesen. Wir kaufen regelmäßig Non-Food-Bestände mit Rauch- oder Wasserschaden auf, komplett und in einem Zug, mit eigenem Transport.\n\nFalls Sie uns an den zuständigen Versicherer oder die Geschäftsleitung verweisen können, wären wir Ihnen dankbar.\n\nMet vriendelijke groeten,\nMit freundlichen Grüßen\nKind Regards,\n\nEric Kooistra\n+31 6 54221199",
+                   "Dear sir or madam,\n\nWe read about the fire. We regularly buy non-food stock with smoke or water damage, complete and in one go, with our own transport.\n\nIf you could refer us to the insurer or the management involved, we would be grateful.\n\nMet vriendelijke groeten,\nMit freundlichen Grüßen\nKind Regards,\n\nEric Kooistra\n+31 6 54221199") ,
+        concept2: T("Sehr geehrte Damen und Herren,\n\nwir kaufen regelmäßig Non-Food-Bestände mit Rauch- oder Wasserschaden auf, komplett, in einem Zug und mit eigenem Transport.\n\nKönnten Sie uns an den zuständigen Versicherer oder die Geschäftsleitung verweisen? Wir melden uns dann direkt.\n\nMet vriendelijke groeten,\nMit freundlichen Grüßen\nKind Regards,\n\nEric Kooistra\n+31 6 54221199",
+                    "Sehr geehrte Damen und Herren,\n\nwir kaufen regelmäßig Non-Food-Bestände mit Rauch- oder Wasserschaden auf, komplett, in einem Zug und mit eigenem Transport.\n\nKönnten Sie uns an den zuständigen Versicherer oder die Geschäftsleitung verweisen? Wir melden uns dann direkt.\n\nMet vriendelijke groeten,\nMit freundlichen Grüßen\nKind Regards,\n\nEric Kooistra\n+31 6 54221199") },
 
       { id: "m9", van: "Vastgoed Leads Nederland", adres: "no-reply@vastgoedleads-nl.biz", tijd: "07:12",
         onderwerp: T("EXCLUSIEF: 250 vastgoedleads voor u klaargezet", "EXCLUSIVE: 250 property leads ready for you"),
@@ -161,8 +183,13 @@
         (m.concept ? '<div class="mt-4">' +
           (concept
             ? '<div class="border border-slate-200 bg-white p-4">' +
+              '<div class="flex flex-wrap items-baseline justify-between gap-2">' +
               '<p class="' + LBL + '">' + T("Concept-antwoord · geschreven in Erics toon", "Draft reply · written in Eric's tone") + '</p>' +
-              '<pre class="mt-2 whitespace-pre-wrap font-sans text-[12px] leading-5 text-[#13263a]">' + m.concept + '</pre>' +
+              '<p class="text-[10px] uppercase tracking-[0.1em] text-slate-400">' + T("Versie ", "Version ") + ((concept - 1) % 2 + 1) + T(" van 2", " of 2") + '</p></div>' +
+              '<textarea data-ek-mail-edit="' + m.id + '" rows="' + Math.min(20, (tekstVan(m).split("\n").length + 2)) + '" ' +
+                'class="mt-2 w-full resize-y border border-slate-200 bg-slate-50 p-3 font-sans text-[12px] leading-5 text-[#13263a] outline-none focus:border-[#010b22]">' +
+                tekstVan(m).replace(/&/g, "&amp;").replace(/</g, "&lt;") + '</textarea>' +
+              '<p class="mt-1.5 text-[11px] text-slate-500">' + T("Je kunt de tekst hier direct aanpassen voordat je hem kopieert.", "You can edit the text here before copying it.") + '</p>' +
               '<div class="mt-3 flex flex-wrap gap-2">' +
               '<button type="button" data-ek-mail-copy="' + m.id + '" class="border border-slate-300 bg-white px-3 py-2 text-[10px] font-bold uppercase tracking-[0.1em] text-[#13263a]">' + T("Kopieer tekst", "Copy text") + '</button>' +
               '<button type="button" data-ek-mail-again="' + m.id + '" class="border border-slate-300 bg-white px-3 py-2 text-[10px] font-bold uppercase tracking-[0.1em] text-slate-600">' + T("Andere versie", "Another version") + '</button>' +
@@ -265,18 +292,23 @@
   function vul() {
     var root = document.getElementById("ek-mail-root");
     if (!root) return;
-    var stempel = [window.__EK_LANG ? window.__EK_LANG() : "nl", filter, geopend, Object.keys(concepten).join(","), Object.keys(doorgestuurd).join(",")].join("|");
+    var stempel = [window.__EK_LANG ? window.__EK_LANG() : "nl", filter, geopend, JSON.stringify(concepten), Object.keys(doorgestuurd).join(","), Object.keys(bewerkt).join(",")].join("|");
     if (root.dataset.gevuld === stempel) return;
     root.dataset.gevuld = stempel;
     root.innerHTML = html();
     if (!root.dataset.klik) {
       root.dataset.klik = "1";
+      root.addEventListener("input", function (e) {
+        var t = e.target.closest("[data-ek-mail-edit]");
+        if (t) bewerkt[t.getAttribute("data-ek-mail-edit")] = t.value;
+      });
       root.addEventListener("click", function (e) {
         var f = e.target.closest("[data-ek-mailfilter]");
         if (f) { filter = f.getAttribute("data-ek-mailfilter"); geopend = null; return vul(); }
         var g = e.target.closest("[data-ek-mail-gen],[data-ek-mail-again]");
         if (g) {
           var gid = g.getAttribute("data-ek-mail-gen") || g.getAttribute("data-ek-mail-again");
+          if (g.hasAttribute("data-ek-mail-again")) delete bewerkt[gid];
           concepten[gid] = (concepten[gid] || 0) + 1;
           return vul();
         }
@@ -285,8 +317,10 @@
         var cpy = e.target.closest("[data-ek-mail-copy]");
         if (cpy) {
           var mid = cpy.getAttribute("data-ek-mail-copy");
+          var veld = root.querySelector('[data-ek-mail-edit="' + mid + '"]');
           var m = berichten().find(function (x) { return x.id === mid; });
-          try { navigator.clipboard.writeText(m.concept); } catch (err) {}
+          var tekst = veld ? veld.value : tekstVan(m);
+          try { navigator.clipboard.writeText(tekst); } catch (err) {}
           cpy.textContent = T("Gekopieerd", "Copied");
           return;
         }
