@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="nl">
+
+  <head>
+    <meta charset="UTF-8" />
+    <base href="/ek-dashboard/" />
+    <script>window.__EK_BASE__="/ek-dashboard";window.__EK_PATH=function(){var p=location.pathname,b=window.__EK_BASE__||"";return b&&p.indexOf(b)===0?(p.slice(b.length)||"/"):p;};</script>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>EK Dashboard by NordX</title>
+    <script>
+      // Lokale API-laag: vervangt de backend (/api/trpc) zodat de app zelfstandig draait.
+      (function () {
+        var origFetch = window.fetch.bind(window);
+        function trpcOk(json) {
+          return new Response(JSON.stringify([{ result: { data: { json: json } } }]), {
+            status: 200,
+            headers: { "Content-Type": "application/json" }
+          });
+        }
+        function ekLang() {
+          try { return localStorage.getItem("ek-dashboard-language") === "en" ? "en" : "nl"; }
+          catch (e) { return "nl"; }
+        }
+        function advisorAnswer(question) {
+          var q = (question || "").toLowerCase();
+          var en = ekLang() === "en";
+          function pick(nl, eng) { return en ? eng : nl; }
+
+          if ((q.indexOf("review") !== -1 && q.indexOf("week") !== -1) || q.indexOf("beoorde") !== -1 || q.indexOf("deze week") !== -1) {
+            return {
+              answer: pick(
+                "Vier objecten vragen deze week om beoordeling, alle vanwege openstaande achterstanden in de incassowachtrij. Blockhouse (Groningen) heeft het grootste openstaande saldo, gevolgd door de portefeuilleobjecten in Zuidhorn, Heerenveen en Oosterwolde. In het register staan 23 objecten met een achterstand, samen \u20ac 351.660. Aanbevolen volgorde: bevestig eerst de betalingsregelingen op de twee grootste saldi en werk daarna de resterende posten af via het reguliere incassoritme.",
+                "Four assets need review this week, all because of open arrears in the collections queue. Blockhouse (Groningen) carries the largest open balance, followed by the portfolio assets in Zuidhorn, Heerenveen and Oosterwolde. The register shows 43 assets in arrears totalling \u20ac 351,660. Suggested order: confirm the payment plans on the two largest balances first, then work through the remainder on the normal collections rhythm."),
+              facts: pick(
+                ["Openstaande achterstanden \u20ac 351.660", "43 objecten met achterstand", "Incasso 88,7%", "50 objecten met werkorders"],
+                ["Open arrears \u20ac 351,660", "43 assets in arrears", "Collection rate 88.7%", "50 assets with work orders"])
+            };
+          }
+          if (q.indexOf("arrears") !== -1 || q.indexOf("achterstand") !== -1 || q.indexOf("incasso") !== -1) {
+            return {
+              answer: pick(
+                "De huidige achterstandspositie bedraagt \u20ac 351.660 over 43 objecten, geconcentreerd in de noordelijke woning- en logistieke portefeuille. Dat komt neer op een incassopercentage van 88,7% van de maandhuur. Geen enkele post is ouder dan 90 dagen; de oorzaak ligt bij late huurbetalingen en niet bij geschillen, dus geldt de normale escalatie via het incassoproces.",
+                "The current arrears position is \u20ac 351,660 across 43 assets, concentrated in the northern residential and logistics portfolio. That works out at a collection rate of 88.7% of the monthly rent roll. No item is older than 90 days; the cause is late rent payment rather than dispute, so the standard collections escalation applies."),
+              facts: pick(
+                ["Totale achterstand \u20ac 351.660", "43 huurdersrekeningen", "Incasso 88,7%", "Bezetting 70,7%"],
+                ["Total arrears \u20ac 351,660", "43 tenant accounts", "Collection rate 88.7%", "Occupancy 70.7%"])
+            };
+          }
+          if (q.indexOf("capital") !== -1 || q.indexOf("energy") !== -1 || q.indexOf("capex") !== -1 || q.indexOf("energie") !== -1 || q.indexOf("kapitaal") !== -1) {
+            return {
+              answer: pick(
+                "Het goedgekeurde 12-maands kapitaalplan bedraagt \u20ac 30.537.830 voor de gehele portefeuille. Voor objecten onder de energiedoelstelling richt het plan zich op vervanging van installaties, beglazing en labelverbetering in de Friese en Groningse bezittingen. Installatiewerk gaat naar Synergy, klein onderhoud en afwerking naar het eigen Bouwteam en de grote ingrepen naar Dijkstra Draisma of Bouwbedrijf Postma. Door de werkzaamheden af te stemmen op geplande huurgebeurtenissen blijft het leegstandsrisico beperkt.",
+                "The approved 12-month capital plan is \u20ac 30,537,830 across the portfolio. For assets below the energy target it focuses on plant replacement, glazing and label improvement in the Friesland and Groningen holdings. Installation work goes to Synergy, small repairs and finishing to the in-house Bouwteam, and the large interventions to Dijkstra Draisma or Bouwbedrijf Postma. Aligning the works with planned lease events keeps vacancy risk contained."),
+              facts: pick(
+                ["12-maands capex \u20ac 30.537.830", "118 objecten in register", "77 aandachtspunten", "Energieplan gevolgd tot 2030"],
+                ["12-month capex \u20ac 30,537,830", "118 assets in register", "77 exceptions", "Energy plan tracked to 2030"])
+            };
+          }
+          if (q.indexOf("lease") !== -1 || q.indexOf("expiry") !== -1 || q.indexOf("24 months") !== -1 || q.indexOf("huurcontract") !== -1 || q.indexOf("expiratie") !== -1) {
+            return {
+              answer: pick(
+                "Het expiratierisico van huurcontracten is op korte termijn beheersbaar: 29 contracten lopen af v\u00f3\u00f3r 2027, tegenover een maandelijkse huurstroom van \u20ac 3.098.525. Met een portefeuillebezetting van 70,7% naar verhuurbaar oppervlak verdienen de objecten prioriteit waar aflopende contracten samenvallen met bestaande leegstand - met name de commerci\u00eble bezittingen in Leeuwarden. Tijdige verlengingsgesprekken beschermen de huurstroom.",
+                "Short-term lease-expiry risk is manageable: 29 leases end before 2027, against a monthly rent roll of \u20ac 3,098,525. With portfolio occupancy at 70.7% by lettable area, priority goes to assets where expiries coincide with existing vacancy - particularly the commercial holdings in Leeuwarden. Early renewal conversations protect the rent roll."),
+              facts: pick(
+                ["29 contracten aflopend v\u00f3\u00f3r 2027", "Huurstroom \u20ac 3.098.525 / maand", "Bezetting 70,7%", "Portefeuillewaarde \u20ac 588.244.900"],
+                ["29 leases ending before 2027", "Rent roll \u20ac 3,098,525 / month", "Occupancy 70.7%", "Portfolio value \u20ac 588,244,900"])
+            };
+          }
+          return {
+            answer: pick(
+              "Op basis van het huidige register is de portefeuillepositie stabiel: 118 objecten met een gezamenlijke waarde van \u20ac 588.244.900, een maandelijkse huurstroom van \u20ac 3.098.525 en een schuld van \u20ac 235.276.100 bij 40,0% LTV. Openstaande punten: \u20ac 351.660 aan achterstanden over 43 objecten, werkorders op 50 objecten en 77 aandachtspunten. De beslissingsdesk meldt deze vraag opnieuw zodra de onderliggende gegevens wijzigen.",
+              "Based on the current register the portfolio position is stable: 118 assets with a combined value of \u20ac 588,244,900, a monthly rent roll of \u20ac 3,098,525 and debt of \u20ac 235,276,100 at 40.0% LTV. Open items: \u20ac 351,660 in arrears across 43 assets, work orders on 50 assets and 77 exceptions. The decision desk will flag this query again if the underlying data changes."),
+            facts: pick(
+              ["Portefeuillewaarde \u20ac 588.244.900", "LTV 40,0%", "Achterstanden \u20ac 351.660", "77 aandachtspunten"],
+              ["Portfolio value \u20ac 588,244,900", "LTV 40.0%", "Arrears \u20ac 351,660", "77 exceptions"])
+          };
+        }
+        window.fetch = function (input, init) {
+          try {
+            var url = typeof input === "string" ? input : (input && input.url) || "";
+            if (url.indexOf("/api/trpc") !== -1) {
+              if (url.indexOf("advisor.ask") !== -1) {
+                var body = init && init.body ? init.body : "";
+                var question = "";
+                try {
+                  var parsed = JSON.parse(body);
+                  var first = parsed["0"] || parsed[0] || parsed;
+                  question = (first && first.json && first.json.question) || "";
+                } catch (e) {}
+                var payload = advisorAnswer(question);
+                return new Promise(function (resolve) {
+                  setTimeout(function () { resolve(trpcOk(payload)); }, 650);
+                });
+              }
+              if (url.indexOf("auth.logout") !== -1) {
+                return Promise.resolve(trpcOk({ success: true }));
+              }
+              if (url.indexOf("auth.me") !== -1) {
+                return Promise.resolve(trpcOk({
+                  id: "user_owner_1",
+                  openId: "user_owner_1",
+                  name: "Christian",
+                  email: "christian@stratexs.com",
+                  role: "owner",
+                  isActive: true,
+                  loginMethod: "sso",
+                  createdAt: "2026-01-05T09:00:00.000Z",
+                  updatedAt: "2026-08-20T09:00:00.000Z",
+                  lastSignedIn: "2026-08-23T08:00:00.000Z"
+                }));
+              }
+              return Promise.resolve(trpcOk(null));
+            }
+          } catch (e) {}
+          return origFetch(input, init);
+        };
+      })();
+    </script>
+    <script src="i18n.js"></script>
+    <script src="nl-dict.js"></script>
+    <script src="nl.js"></script>
+    <script src="basemap.js"></script>
+    <script src="images.js"></script>
+    <script src="asset-notes.js"></script>
+    <script src="aandachtspunten.js"></script>
+    <script src="donedeals.js"></script>
+    <script src="cars.js"></script>
+    <script src="kooistra.js"></script>
+    <script src="bank.js"></script>
+    <script src="monument.js"></script>
+    <script src="zoning.js"></script>
+    <script src="glossary.js"></script>
+    <script src="analytics.js"></script>
+    <script src="mail.js"></script>
+    <script src="tax.js"></script>
+    <script src="esg.js"></script>
+    <script type="module" crossorigin src="assets/index-u7VC404Q.js"></script>
+    <link rel="stylesheet" crossorigin href="assets/index-CgNpXFir.css">
+    <link rel="stylesheet" href="rounded.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
