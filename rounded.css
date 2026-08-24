@@ -161,3 +161,16 @@ label[class*="border"][class*="px-"], label[class*="border"][class*="p-4"] { bor
   backdrop-filter: blur(6px);
 }
 
+
+/* De NL/EN-schakelaar mag niet verspringen bij het wisselen van taal.
+   De twee tellers rechts ervan zijn in het Engels korter ("118 assets" versus
+   "118 objecten"), en omdat die groep rechts is uitgelijnd schoof de
+   schakelaar mee. Een vaste minimumbreedte per teller houdt alles op zijn plek. */
+header [class~="text-[9px]"][class~="md:inline"][class~="border-[#c7c7c7]"] {
+  min-width: 6.6rem;
+  text-align: center;
+}
+header [class~="text-[9px]"][class~="md:inline"][class~="border-[#e53946]/45"] {
+  min-width: 9.6rem;
+  text-align: center;
+}
