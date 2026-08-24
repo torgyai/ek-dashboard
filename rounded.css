@@ -141,3 +141,23 @@ label[class*="border"][class*="px-"], label[class*="border"][class*="p-4"] { bor
 @media (min-width: 1280px) {
   .ek-sticky { position: sticky; top: 1rem; align-self: start; max-height: calc(100vh - 2rem); overflow: auto; }
 }
+
+/* label demonstratieomgeving */
+#ek-demo-label {
+  position: fixed;
+  right: 14px;
+  bottom: 12px;
+  z-index: 40;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .82);
+  border: 1px solid rgba(1, 11, 34, .12);
+  color: rgba(1, 11, 34, .5);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  pointer-events: none;
+  backdrop-filter: blur(6px);
+}
+
