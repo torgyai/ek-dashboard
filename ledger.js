@@ -115,6 +115,7 @@
       else if (tab === "posten") body = postenTab();
       else if (tab === "btw") body = btwTab(entiteit);
       else if (tab === "schema") body = schemaTab(B, R);
+      else if (tab === "activa") body = activaTab(entiteit);
       else body = afsluitingTab();
 
       return U.head({
@@ -139,6 +140,7 @@
         { id: "posten", label: T("Journaalposten", "Journal entries") },
         { id: "schema", label: T("Rekeningschema", "Chart of accounts") },
         { id: "btw", label: T("Btw & ICP", "VAT & ICP") },
+        { id: "activa", label: T("Vaste activa", "Fixed assets") },
         { id: "afsluiting", label: T("Periodeafsluiting", "Period close") }
       ], tab, "data-ek-gb-tab") + '</div>' + body;
     }
@@ -248,6 +250,54 @@
           [T("ICP", "ICP"), T("geen intracommunautaire prestaties dit tijdvak", "no intra-EU supplies this period")],
           [T("Aangiftedatum", "Filing date"), U.DATE("2026-08-31")]
         ]) + '</div>') + '</div>';
+  }
+
+  function activaTab(ent) {
+    var f = ent === "eye" ? 1 : (ent === "erko" ? 0.18 : 0.07);
+    function r(n) { return Math.round(n * f / 100) * 100; }
+    var A = [
+      { oms: T("Liftinstallatie Achmeatoren", "Lift installation Achmeatoren"), rek: "0200", aanschaf: "2014-06-01", kost: r(214000), termijn: 25, rest: r(21400) },
+      { oms: T("Luchtbehandeling Achmeatoren", "Air handling Achmeatoren"), rek: "0200", aanschaf: "2014-06-01", kost: r(168000), termijn: 15, rest: 0 },
+      { oms: T("Cv-cascade Achmeatoren", "Boiler cascade Achmeatoren"), rek: "0200", aanschaf: "2016-09-01", kost: r(96000), termijn: 18, rest: 0 },
+      { oms: T("Brandmeldinstallatie", "Fire alarm system"), rek: "0200", aanschaf: "2018-03-01", kost: r(84000), termijn: 15, rest: 0 },
+      { oms: T("Warmtepomp Trije Hûs", "Heat pump Trije Hûs"), rek: "0200", aanschaf: "2023-05-01", kost: r(62000), termijn: 15, rest: 0 },
+      { oms: T("Zonnepanelen Magazijn Apolloweg", "Solar panels Apolloweg warehouse"), rek: "0200", aanschaf: "2022-04-01", kost: r(148000), termijn: 20, rest: 0 },
+      { oms: T("Inrichting kantoor Dokkum", "Office fit-out Dokkum"), rek: "0200", aanschaf: "2021-01-01", kost: r(74000), termijn: 10, rest: 0 },
+      { oms: T("Bedrijfswagens bouwteam", "Building team vehicles"), rek: "0210", aanschaf: "2024-02-01", kost: r(186000), termijn: 6, rest: r(46500) }
+    ];
+    var vandaag = 2026 + 7 / 12;
+    var rijen = A.map(function (a) {
+      var jaren = vandaag - (parseInt(a.aanschaf.slice(0, 4), 10) + (parseInt(a.aanschaf.slice(5, 7), 10) - 1) / 12);
+      var perJaar = (a.kost - a.rest) / a.termijn;
+      var cum = Math.min(a.kost - a.rest, Math.round(perJaar * jaren));
+      var boek = a.kost - cum;
+      var pct = Math.round(cum / (a.kost - a.rest) * 100);
+      return [U.esc(a.oms) + '<br><span class="ek-sub">' + T("rekening ", "account ") + a.rek + '</span>',
+        U.DATE(a.aanschaf), '<span class="ek-num">' + U.EUR(a.kost) + '</span>',
+        a.termijn + " " + T("jaar", "years"),
+        '<span class="ek-num">' + U.EUR(Math.round(perJaar)) + '</span>',
+        '<span class="ek-num">' + U.EUR(cum) + '</span>',
+        '<span class="ek-num">' + U.EUR(boek) + '</span>',
+        '<div class="ek-bar' + (pct >= 100 ? " ek-bar-red" : "") + '"><span style="width:' + Math.min(100, pct) + '%"></span></div>' +
+        '<span class="ek-sub">' + (pct >= 100 ? T("volledig afgeschreven", "fully depreciated") : pct + "%") + '</span>'];
+    });
+    var totK = A.reduce(function (s2, a) { return s2 + a.kost; }, 0);
+    var totB = A.reduce(function (s2, a) {
+      var jaren = vandaag - (parseInt(a.aanschaf.slice(0, 4), 10) + (parseInt(a.aanschaf.slice(5, 7), 10) - 1) / 12);
+      var perJaar = (a.kost - a.rest) / a.termijn;
+      return s2 + (a.kost - Math.min(a.kost - a.rest, Math.round(perJaar * jaren)));
+    }, 0);
+    rijen.push({ total: true, cells: [T("Totaal", "Total"), "", '<span class="ek-num">' + U.EUR(totK) + '</span>', "", "", 
+      '<span class="ek-num">' + U.EUR(totK - totB) + '</span>', '<span class="ek-num">' + U.EUR(totB) + '</span>', ""] });
+    return '<div class="ek-mt">' + U.panel(T("Vaste activa", "Fixed assets"),
+      U.table([{ label: T("Activum", "Asset") }, { label: T("Aanschaf", "Acquired") }, { label: T("Aanschafwaarde", "Cost"), num: true },
+        { label: T("Termijn", "Term") }, { label: T("Per jaar", "Per year"), num: true }, { label: T("Cumulatief", "Accumulated"), num: true },
+        { label: T("Boekwaarde", "Carrying value"), num: true }, { label: T("Afgeschreven", "Depreciated") }], rijen),
+      U.btns([{ label: T("Activum toevoegen", "Add an asset"), primary: true }, { label: T("Afschrijving boeken", "Post depreciation") },
+        { label: T("Desinvestering", "Disposal") }, { label: T("Naar installatieregister", "To the installation register") }, { label: T("Exporteren", "Export") }])) +
+      U.ai(T("Waar de activastaat en het installatieregister elkaar raken", "Where the asset register and the installation register meet"),
+        T("De luchtbehandeling staat hier volledig afgeschreven, maar draait nog en geeft nu storing. Boekhoudkundig is hij nul waard, technisch is hij het probleem van dit kwartaal en in het meerjarenplan staat de vervanging pas over vier jaar. Dat is precies het gesprek dat je wilt kunnen voeren met één scherm ernaast in plaats van drie systemen.",
+          "The air handling unit is fully depreciated here, yet it still runs and is now faulting. In accounting terms it is worth nothing, technically it is this quarter's problem, and the long-term plan has its replacement four years out. That is exactly the conversation you want to have with one screen alongside instead of three systems.")) + '</div>';
   }
 
   function afsluitingTab() {

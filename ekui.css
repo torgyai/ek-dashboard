@@ -171,3 +171,26 @@
 .ek-zoek-uit button:hover { background: var(--ek-soft); }
 .ek-zoek-uit button small { display: block; font-size: 10.5px; color: #64748b; margin-top: 1px; }
 .ek-zoek-leeg { padding: 18px; font-size: 12.5px; color: #64748b; }
+
+/* ---------- portaalsimulator ---------- */
+.ek-portal { border: 1px solid var(--ek-line2); border-radius: 18px; overflow: hidden; background: #fff; box-shadow: 0 24px 48px rgba(1, 11, 34, .07); }
+.ek-portal-bar { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 13px 18px; background: var(--ek-ink); color: #eee; }
+.ek-portal-merk { display: flex; align-items: center; gap: 10px; }
+.ek-portal-logo { font-size: 12px; font-weight: 700; letter-spacing: .02em; }
+.ek-portal-logo small { display: block; font-size: 8px; letter-spacing: .18em; text-transform: uppercase; opacity: .6; margin-top: 1px; }
+.ek-portal-rol { border: 1px solid rgba(238, 238, 238, .3); border-radius: 999px; padding: 3px 10px; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; }
+.ek-portal-user { display: flex; align-items: center; gap: 9px; font-size: 10.5px; }
+.ek-avatar { width: 26px; height: 26px; border-radius: 999px; background: var(--ek-red); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; }
+.ek-portal-nav { display: flex; gap: 5px; padding: 10px 14px; border-bottom: 1px solid var(--ek-line); background: var(--ek-soft); overflow-x: auto; }
+.ek-portal-nav button {
+  border: 1px solid transparent; background: none; cursor: pointer; white-space: nowrap;
+  padding: 6px 12px; border-radius: 999px; font-size: 11px; font-weight: 600; color: #475569;
+}
+.ek-portal-nav button:hover { background: #fff; border-color: var(--ek-line); }
+.ek-portal-nav button.ek-on { background: #fff; border-color: var(--ek-line2); color: var(--ek-ink); }
+.ek-portal-body { padding: 20px; background: #fbfbf9; }
+.ek-portal-titel { font-size: 19px; font-weight: 600; letter-spacing: -.02em; color: #13263a; margin: 0; }
+.ek-portal-sub { font-size: 12px; line-height: 19px; color: rgba(1, 11, 34, .62); margin: 6px 0 0; max-width: 70ch; }
+.ek-melding { border: 1px solid rgba(22, 128, 84, .35); background: rgba(22, 128, 84, .07); color: #167a51; border-radius: 12px; padding: 10px 14px; font-size: 11.5px; }
+.ek-form { border: 1px solid var(--ek-line2); border-radius: 14px; padding: 14px; background: #fff; }
+.ek-form label { display: block; margin-bottom: 10px; }
