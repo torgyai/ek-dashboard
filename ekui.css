@@ -1,0 +1,123 @@
+/* Eigen opmaaklaag voor de nieuwe werkruimtes.
+   De Tailwind-bundel van de app is gepurged, dus alles wat hier nieuw is
+   krijgt een eigen ek-klasse in plaats van een klasse die niet bestaat. */
+
+:root {
+  --ek-ink: #010b22;
+  --ek-red: #e53946;
+  --ek-line: #d9ddd6;
+  --ek-line2: #c7c7c7;
+  --ek-soft: #f6f6f4;
+}
+
+/* ---------- rasters ---------- */
+.ek-g { display: grid; gap: 12px; grid-template-columns: 1fr; }
+.ek-g.ek-gap5 { gap: 20px; }
+@media (min-width: 640px) { .ek-g2, .ek-g3, .ek-g4, .ek-g5, .ek-g6 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1024px) {
+  .ek-g3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .ek-g4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .ek-g5 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .ek-g6 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .ek-split { grid-template-columns: minmax(0, 1fr) 380px; }
+  .ek-split-wide { grid-template-columns: minmax(0, 1fr) 460px; }
+}
+@media (min-width: 1280px) {
+  .ek-g5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .ek-g6 { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+}
+
+/* ---------- kaarten en panelen ---------- */
+.ek-card { border: 1px solid var(--ek-line); background: #fff; padding: 20px; border-radius: 14px; }
+.ek-card-tight { padding: 14px 16px; }
+.ek-panel { border: 1px solid var(--ek-line); background: #fff; border-radius: 14px; overflow: hidden; }
+.ek-panel-head {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 12px 16px; border-bottom: 1px solid var(--ek-line);
+  background: var(--ek-soft);
+}
+.ek-panel-body { padding: 16px; }
+.ek-lbl { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .13em; color: #64748b; }
+.ek-val { margin-top: 10px; font-size: 22px; font-weight: 600; letter-spacing: -.05em; color: #13263a; }
+.ek-sub { margin-top: 4px; font-size: 11px; line-height: 16px; color: #64748b; }
+.ek-p { font-size: 12px; line-height: 20px; color: rgba(1, 11, 34, .68); }
+.ek-h3 { font-size: 13px; font-weight: 600; letter-spacing: -.01em; color: #13263a; }
+
+/* ---------- tabellen ---------- */
+.ek-scroll { overflow-x: auto; }
+.ek-tbl { width: 100%; border-collapse: collapse; font-size: 11.5px; }
+.ek-tbl th {
+  text-align: left; padding: 9px 12px; white-space: nowrap;
+  font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: #64748b;
+  border-bottom: 1px solid var(--ek-line2); background: var(--ek-soft);
+}
+.ek-tbl td { padding: 10px 12px; border-bottom: 1px solid #ebece8; vertical-align: top; color: #1f2a3a; }
+.ek-tbl tr:last-child td { border-bottom: 0; }
+.ek-tbl .ek-num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.ek-tbl tr[data-ek-row] { cursor: pointer; }
+.ek-tbl tr[data-ek-row]:hover td { background: var(--ek-soft); }
+.ek-tbl tr.ek-on td { background: #eef2f7; }
+.ek-tbl-total td { font-weight: 600; background: var(--ek-soft); }
+
+/* ---------- knoppen, chips, tabs ---------- */
+.ek-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  border: 1px solid var(--ek-line2); background: #fff; color: var(--ek-ink);
+  padding: 7px 12px; border-radius: 999px; cursor: pointer;
+  font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em;
+}
+.ek-btn:hover { background: var(--ek-soft); }
+.ek-btn-primary { background: var(--ek-ink); border-color: var(--ek-ink); color: #eee; }
+.ek-btn-primary:hover { background: #12233f; }
+.ek-btn-danger { border-color: rgba(229, 57, 70, .5); color: var(--ek-red); }
+.ek-btn[disabled], .ek-btn.ek-off { opacity: .45; cursor: default; }
+.ek-btns { display: flex; flex-wrap: wrap; gap: 6px; }
+
+.ek-tabs { display: flex; flex-wrap: wrap; gap: 6px; }
+.ek-tab {
+  border: 1px solid var(--ek-line2); background: #fff; color: rgba(1, 11, 34, .7);
+  padding: 6px 12px; border-radius: 999px; cursor: pointer;
+  font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em;
+}
+.ek-tab:hover { background: var(--ek-soft); }
+.ek-tab.ek-on { background: var(--ek-ink); border-color: var(--ek-ink); color: #eee; }
+
+.ek-chip {
+  display: inline-flex; align-items: center; gap: 5px;
+  border: 1px solid var(--ek-line2); border-radius: 999px; padding: 3px 9px;
+  font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: #475569;
+  white-space: nowrap;
+}
+.ek-chip.ek-ok { border-color: rgba(22, 128, 84, .35); color: #167a51; background: rgba(22, 128, 84, .07); }
+.ek-chip.ek-warn { border-color: rgba(198, 132, 12, .4); color: #a4700a; background: rgba(198, 132, 12, .08); }
+.ek-chip.ek-bad { border-color: rgba(229, 57, 70, .45); color: var(--ek-red); background: rgba(229, 57, 70, .07); }
+.ek-chip.ek-info { border-color: rgba(29, 78, 216, .35); color: #1d4ed8; background: rgba(29, 78, 216, .06); }
+.ek-dot { width: 6px; height: 6px; border-radius: 999px; background: currentColor; display: inline-block; }
+
+/* ---------- balken en meters ---------- */
+.ek-bar { height: 6px; border-radius: 999px; background: #e8e9e5; overflow: hidden; }
+.ek-bar > span { display: block; height: 100%; background: var(--ek-ink); border-radius: 999px; }
+.ek-bar.ek-bar-red > span { background: var(--ek-red); }
+.ek-bar.ek-bar-ok > span { background: #167a51; }
+
+/* ---------- formulier-achtige velden (alleen tonen) ---------- */
+.ek-field { border: 1px solid var(--ek-line2); border-radius: 10px; padding: 8px 10px; background: #fff; font-size: 11.5px; color: #1f2a3a; width: 100%; }
+.ek-field-lbl { display: block; margin-bottom: 4px; }
+.ek-check { display: flex; align-items: flex-start; gap: 8px; font-size: 11.5px; color: #1f2a3a; padding: 6px 0; }
+.ek-check input { margin-top: 2px; }
+
+/* ---------- diverse ---------- */
+.ek-dim { opacity: .6; }
+.ek-mt { margin-top: 20px; }
+.ek-mt-s { margin-top: 12px; }
+.ek-flow { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.ek-flow .ek-arrow { color: #94a3b8; font-size: 11px; }
+.ek-step { border: 1px solid var(--ek-line2); border-radius: 999px; padding: 5px 11px; font-size: 10px; font-weight: 700; letter-spacing: .06em; color: #475569; background: #fff; }
+.ek-step.ek-done { border-color: rgba(22, 128, 84, .4); color: #167a51; background: rgba(22, 128, 84, .07); }
+.ek-step.ek-now { border-color: var(--ek-ink); background: var(--ek-ink); color: #eee; }
+.ek-note { border-left: 2px solid var(--ek-line2); padding-left: 12px; font-size: 11.5px; line-height: 18px; color: rgba(1, 11, 34, .7); }
+.ek-ai { border: 1px solid rgba(29, 78, 216, .25); background: rgba(29, 78, 216, .04); border-radius: 14px; padding: 16px; }
+.ek-kv { display: grid; grid-template-columns: 130px minmax(0, 1fr); gap: 6px 14px; font-size: 11.5px; }
+.ek-kv dt { color: #64748b; }
+.ek-kv dd { color: #1f2a3a; }
+.ek-hide { display: none; }
