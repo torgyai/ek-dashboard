@@ -40,6 +40,8 @@
     for (var i = 0; i < lijst.length; i++) {
       var el = lijst[i];
       if (el.dataset.ekMon || el.querySelector("[data-ek-monument]")) continue;
+      /* de nieuwe werkruimtes noemen objectnamen in tabellen en kaarten; daar hoort geen monumentmarkering */
+      if (el.closest(".ek-card, .ek-panel, .ek-kv, .ek-tbl, .ek-chip")) continue;
       if (el.children.length) continue;
       var t = (el.textContent || "").trim();
       if (!t || t.length > 70 || !set[t]) continue;
